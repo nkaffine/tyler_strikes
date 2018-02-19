@@ -23,10 +23,9 @@
          *
          * @param $user IUser the user authoring the strike.
          * @param $description string the description of the strike.
-         * @param $type int whether the strike was good or bad.
          * @return IStrike
          */
-        public static function newStrike($user, $description, $type);
+        public static function newStrike($user, $description);
 
         /**
          * Gets the date of this strike.
