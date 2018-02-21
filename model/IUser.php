@@ -30,6 +30,16 @@
         public static function login($username, $password);
 
         /**
+         * Returns the user with the given email and password.
+         *
+         * @param $email string the email of the user.
+         * @param $password string the password of the user.
+         * @return IUser
+         * @throws InvalidLoginCredentialsException
+         */
+        public static function loginEmail($email, $password);
+
+        /**
          * Returns the user with the given id.
          *
          * @param $id int the user_id of the desired user.
@@ -68,4 +78,11 @@
          * @return string the username of this user.
          */
         public function getUsername();
+
+        /**
+         * Logs the user out of the system if they are logged in.
+         *
+         * @return void
+         */
+        public static function logout();
     }
