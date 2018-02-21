@@ -35,9 +35,8 @@
                 $user = User::newUser($username, $password, $email);
                 $results['results'] = "success";
             } else if ($type === "login") {
-                if ($_GET["email"] == null) {
+                if ($_GET["email"] === null) {
                     $user = User::login($username, $password);
-                    $results['successlogin'];
                 } else {
                     $user = User::loginEmail($email, $password);
                 }

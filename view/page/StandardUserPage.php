@@ -19,6 +19,7 @@
          */
         protected function initializeHtmlBody() {
             $navbar = new UserNavbar($this->title);
+            $this->addJSFile("scripts/logout.js");
             $this->addToBody($navbar->generateNavbar(), Page::TOP);
         }
     }

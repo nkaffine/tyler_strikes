@@ -58,12 +58,12 @@
          */
         public static function login($username, $password) {
             $query = new SelectQuery("user", "email", "user_id");
-            $password = password_hash($password, PASSWORD_BCRYPT);
+            $password = md5($password);
             $query->where(Where::whereEqualValue("username", DBValue::stringValue($username)));
             $query->where(Where::whereEqualValue("password", DBValue::stringValue($password)));
             try {
                 $results = DBQuerrier::queryUniqueValue($query);
-            } catch (SQLNonUniqueValueException $exception) {
+            } catch (SQLNoSuchValueException $exception) {
                 throw new InvalidLoginCredentialsException("Credentials supplied were invalid");
             }
             $row = @ mysqli_fetch_array($results);
@@ -82,7 +82,7 @@
          */
         public static function loginEmail($email, $password) {
             $query = new SelectQuery("user", "username", "user_id");
-            $password = password_hash($password, PASSWORD_BCRYPT);
+            $password = md5($password);
             $query->where(Where::whereEqualValue("email", DBValue::stringValue($email)));
             $query->where(Where::whereEqualValue("password", DBValue::stringValue($password)));
             try {
@@ -121,7 +121,7 @@
          * @return IUser
          */
         public static function newUser($username, $password, $email) {
-            $password = password_hash($password, PASSWORD_BCRYPT);
+            $password = md5($password);
             $query = new InsertIncrementQuery("user", "user_id");
             $query->addParamAndValues("username", DBValue::stringValue($username));
             $query->addParamAndValues("email", DBValue::stringValue($email));

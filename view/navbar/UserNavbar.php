@@ -1,6 +1,7 @@
 <?php
     require_once($_SERVER["DOCUMENT_ROOT"] . "/view/navbar/ANavbar.php");
     require_once($_SERVER["DOCUMENT_ROOT"] . "/view/navbar/PageListItem.php");
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/view/navbar/LogoutButton.php");
 
     /**
      * Created by PhpStorm.
@@ -19,6 +20,6 @@
                 }
             }
             $this->right = array();
-            $this->right["logout"] = new PageListItem("Logout", "/process/logout.php");
+            $this->right["logout"] = new LogoutButton();
         }
     }
