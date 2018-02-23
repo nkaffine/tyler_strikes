@@ -18,6 +18,7 @@
         "<button id='login' class='col-xs-6 btn btn-primary'>Log in</button><button id='signup' class='col-xs-6 btn btn-default'>Sign Up</button>";
     $html = "<div class='col-xs-12'><div class='col-xs-12'>" . $email_section . $username_section . $password_section .
         $submit_button . "</div></div>";
+    $page->addToBody("<div id='error' class='col-xs-12'></div>", Page::BOTTOM);
     $page->addToBody($html, Page::BOTTOM);
     $page->addJSFile("/scripts/login.js");
     echo $page->generateHtml();

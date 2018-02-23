@@ -48,7 +48,7 @@
             throw new InvalidArgumentException("Not all required parameters passed");
         }
     } catch (Exception $exception) {
-        $result['error'] = $exception->getMessage();
+        $results['error'] = $exception->getMessage();
     }
     header('Content-Type: application/json');
     echo json_encode($results, JSON_PRETTY_PRINT);

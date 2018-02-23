@@ -5,6 +5,8 @@
     require_once($_SERVER["DOCUMENT_ROOT"] . "/mysql/db/DBQuerrier.php");
     require_once($_SERVER["DOCUMENT_ROOT"] . "/mysql/querying/insert/InsertIncrementQuery.php");
     require_once($_SERVER["DOCUMENT_ROOT"] . "/model/IUser.php");
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/model/exceptions/UserNotLoggedInException.php");
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/model/exceptions/InvalidLoginCredentialsException.php");
 
     /**
      * Created by PhpStorm.

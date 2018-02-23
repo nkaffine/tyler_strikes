@@ -7,12 +7,16 @@ function getLink(type) {
     let password = $("#password").val();
     let link = "/process/login.php?";
     if (type === "login") {
-        link += "type=" + encodeURIComponent("login") + "&password=" + encodeURIComponent(password);
-        if (email === "") {
+        link += "type=" + encodeURIComponent("login");
+        if(password !== "") {
+            link += "&password=" + encodeURIComponent(password);
+        }
+        if (email === "" && username !== "") {
             link += "&username=" + encodeURIComponent(username);
-        } else {
+        } else if (username === "" && email !== "") {
             link += "&email=" + encodeURIComponent(email);
         }
+
     } else if (type === "signup") {
         link += "type=" + encodeURIComponent("signup") + "&password=" + encodeURIComponent(password) + "&username=" +
             encodeURIComponent(username) + "&email=" + encodeURIComponent(email);
@@ -22,9 +26,9 @@ function getLink(type) {
 
 function handleLoginResponse(data) {
     if(data.error !== null) {
-        console.log(data.error);
+        displayError("Login error", data.error);
     } else {
-        console.log(data.results);
+        window.location = "/";
     }
 }
 $(document).ready(function () {

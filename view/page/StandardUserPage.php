@@ -20,6 +20,7 @@
         protected function initializeHtmlBody() {
             $navbar = new UserNavbar($this->title);
             $this->addJSFile("scripts/logout.js");
+            $this->addJSFile("scripts/error.js");
             $this->addToBody($navbar->generateNavbar(), Page::TOP);
         }
     }
