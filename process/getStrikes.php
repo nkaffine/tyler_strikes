@@ -2,8 +2,8 @@
     /**
      * Created by PhpStorm.
      * User: Nick
-     * Date: 2/18/18
-     * Time: 8:31 PM
+     * Date: 3/11/18
+     * Time: 4:51 PM
      */
     require_once($_SERVER["DOCUMENT_ROOT"] . "/model/StrikingModel.php");
 
@@ -26,22 +26,21 @@
     $results['error'] = null;
     $model = new StrikingModel();
     try {
-        if (isset($_GET["type"]) && isset($_GET['password']) && (isset($_GET['username']) || isset($_GET['email']))) {
-            $type = validInputSizeAlpha($_GET["type"], 255);
-            $username = validInputSizeAlpha($_GET["username"], 255);
-            $password = validInputSizeAlpha($_GET["password"], 255);
-            $email = validInputSizeAlpha($_GET["email"], 255);
-            if ($type === "signup") {
-                $model->signUp($username, $email, $password);
-                $results["results"] = "success";
-            } else if ($type === "login") {
-                $model->login($username, $email, $password);
-                $results["results"] = "success";
+        if (isset($_GET["command"])) {
+            $command = validInputSizeAlpha($_GET["command"], 255);
+            if ($command === "total") {
+                $results['results'] = $model->getStrikeStatus();
             } else {
-                throw new InvalidArgumentException("Invalid type of command");
+                throw new InvalidArgumentException("Invalid Command");
             }
         } else {
-            throw new InvalidArgumentException("Not all required parameters passed");
+            $strikes = $model->getStrikes();
+            $json_strikes = array();
+            foreach ($strikes as $strike) {
+                array_push($json_strikes, $strike->getJSON());
+            }
+            $results['results']['strikes'] = $json_strikes;
+            $results['results']['strike_status'] = $model->getStrikeStatus();
         }
     } catch (Exception $exception) {
         $results['error'] = $exception->getMessage();

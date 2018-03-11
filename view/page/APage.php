@@ -167,7 +167,6 @@
             $this->addToHead("<title>" . $this->title . "</title>", Page::TOP);
             $this->addStyleSheet("/styleSheets/main.css");
             $this->addJSFile("/scripts/main.js");
-            $this->addJSFile("/scripts/timeFormatting.js");
         }
 
         protected abstract function initializeHtmlBody();

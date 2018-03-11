@@ -2,8 +2,8 @@
     /**
      * Created by PhpStorm.
      * User: Nick
-     * Date: 2/18/18
-     * Time: 8:31 PM
+     * Date: 3/11/18
+     * Time: 4:19 PM
      */
     require_once($_SERVER["DOCUMENT_ROOT"] . "/model/StrikingModel.php");
 
@@ -12,7 +12,7 @@
         $cleanString = preg_replace("[^\.a-zA-Z' ]", '', $sizedString);
         $cleanString = str_replace("\\", "", $cleanString);
         $cleanString = str_replace("'", "\'", $cleanString);
-        return ($cleanString);
+        return $cleanString;
     }
 
     function validNumbers($uncleanString, $maxLength) {
@@ -26,19 +26,24 @@
     $results['error'] = null;
     $model = new StrikingModel();
     try {
-        if (isset($_GET["type"]) && isset($_GET['password']) && (isset($_GET['username']) || isset($_GET['email']))) {
-            $type = validInputSizeAlpha($_GET["type"], 255);
-            $username = validInputSizeAlpha($_GET["username"], 255);
-            $password = validInputSizeAlpha($_GET["password"], 255);
-            $email = validInputSizeAlpha($_GET["email"], 255);
-            if ($type === "signup") {
-                $model->signUp($username, $email, $password);
-                $results["results"] = "success";
-            } else if ($type === "login") {
-                $model->login($username, $email, $password);
-                $results["results"] = "success";
+        if (isset($_GET["command"]) && isset($_GET['user']) && (isset($_GET['description'])) &&
+            (isset($_GET["type"]))
+        ) {
+            $command = validInputSizeAlpha($_GET["command"], 255);
+            $user = validInputSizeAlpha($_GET["user"], 255);
+            $description = validInputSizeAlpha($_GET["description"], 255);
+            if($description === "") {
+                throw new InvalidArgumentException("Invalid description");
+            }
+            $type = validInputSizeAlpha($_GET["type"], 4);
+            if ($type == "good") {
+                $model->newGoodStrike(User::getUserById($user), $description);
+                $results['results'] = "success";
+            } else if ($type == "bad") {
+                $model->newBadStrike(User::getUserById($user), $description);
+                $results['results'] = "success";
             } else {
-                throw new InvalidArgumentException("Invalid type of command");
+                throw new InvalidArgumentException("Invalid strike type");
             }
         } else {
             throw new InvalidArgumentException("Not all required parameters passed");

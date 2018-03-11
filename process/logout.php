@@ -5,10 +5,11 @@
      * Date: 2/20/18
      * Time: 6:19 PM
      */
-    require_once($_SERVER["DOCUMENT_ROOT"] . "/model/User.php");
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/model/StrikingModel.php");
     $result = array();
     $result['error'] = null;
     $result['results'] = null;
+    $model = new StrikingModel();
     try {
         User::logout();
         $result['results'] = "success";

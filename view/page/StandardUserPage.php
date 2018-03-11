@@ -19,8 +19,12 @@
          */
         protected function initializeHtmlBody() {
             $navbar = new UserNavbar($this->title);
-            $this->addJSFile("scripts/logout.js");
-            $this->addJSFile("scripts/error.js");
+            $this->addJSFile("/scripts/logout.js");
+            $this->addJSFile("/scripts/error.js");
+            $this->addJSFile("/scripts/newStrike.js");
+            $this->addJSFile("/scripts/displayStrikes.js");
+            $this->addJSFile("/scripts/timeFormatting.js");
+            $this->addToHead("<link rel=\"apple-touch-icon\" href=\"/images/aniovalicon.jpg\">", Page::BOTTOM);
             $this->addToBody($navbar->generateNavbar(), Page::TOP);
         }
     }

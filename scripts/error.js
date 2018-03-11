@@ -8,3 +8,7 @@ function displayError(header, message) {
         "<div class=\"panel-body\">" + message + "</div></div>";
     $("#error").html(html);
 }
+
+function clearError() {
+    $("#error").html("");
+}

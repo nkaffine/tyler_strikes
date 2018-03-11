@@ -85,4 +85,18 @@
          * @return void
          */
         public static function logout();
+
+        /**
+         * Gets the user id of this user.
+         *
+         * @return int the user id of this user.
+         */
+        public function getUserId();
+
+        /**
+         * Gets the formatted JSON for this user.
+         *
+         * @return array the formatted JSON for this user.
+         */
+        public function getJSON();
     }

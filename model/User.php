@@ -202,7 +202,28 @@
                 self::loginWithCookie();
                 setcookie("user_id", 0, time() - (24 * 60 * 60), "/");
             } catch (UserNotLoggedInException $exception) {
-             //Do nothing
+                //Do nothing
             }
+        }
+
+        /**
+         * Gets the user id of this user.
+         *
+         * @return int the user id of this user.
+         */
+        public function getUserId() {
+            return $this->id;
+        }
+
+        /**
+         * Gets the formatted JSON for this user.
+         *
+         * @return array the formatted JSON for this user.
+         */
+        public function getJSON() {
+            $json_user = array();
+            $json_user['username'] = $this->username;
+            $json_user['user_id'] = $this->id;
+            return $json_user;
         }
     }
